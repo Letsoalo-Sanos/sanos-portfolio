@@ -17,9 +17,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Sanos Letsoalo | Data Scientist & Analyst",
+  title: "Sanos Letsoalo ",
   description:
-    "Computer Science postgraduate specialising in machine learning, data analysis, and predictive modelling. Based in Limpopo, South Africa.",
+    "Data Scientist & Technical Business Support Specialist delivering data-driven solutions, machine learning models, and business insights. Based in Pretoria, South Africa.",
 };
 
 export default function RootLayout({
