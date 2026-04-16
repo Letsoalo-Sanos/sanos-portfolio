@@ -118,6 +118,7 @@ export default function Navbar() {
               src="/assets/photo.jpg"
               alt="Letsoalo Sanos Neo"
               fill
+              sizes="112px"
               className="rounded-full object-cover object-top"
               style={{ border: "6px solid var(--bg-light)" }}
               priority
@@ -223,7 +224,7 @@ export default function Navbar() {
       <header
         className="lg:hidden fixed top-0 inset-x-0 z-50 transition-all duration-300"
         style={{
-          background: scrolled ? "var(--bg)" : "var(--bg)",
+          background: "var(--bg)",
           borderBottom: scrolled ? "1px solid var(--border)" : "none",
           backdropFilter: scrolled ? "blur(12px)" : "none",
           boxShadow: scrolled ? "0 4px 24px rgba(0,0,0,0.2)" : "none",

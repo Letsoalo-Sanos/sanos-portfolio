@@ -44,7 +44,7 @@ export default function Hero() {
         alt="Hero background"
         fill
         priority
-        className="hero-bgg-image"
+        className="hero-bg-image"
       />
 
       {/* Dark overlay */}
@@ -112,8 +112,6 @@ export default function Hero() {
             </a>
           ))}
         </div>
-
-
       </div>
     </section>
   );
