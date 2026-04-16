@@ -1,9 +1,13 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Image from "next/image";
 
-const TYPED_ITEMS = ["Freelancer", "Data Scientist", "Technical Business Support Specialist",  "Problem Solver"];
+const TYPED_ITEMS = [
+  "Freelancer",
+  "Data Scientist",
+  "Technical Business Support Specialist",
+  "Problem Solver",
+];
 
 export default function Hero() {
   const typedRef = useRef<HTMLSpanElement>(null);
@@ -38,13 +42,21 @@ export default function Hero() {
 
   return (
     <section id="about" className="hero-section">
-      {/* Background image */}
-      <Image
-        src="/assets/hero-bgg.jpeg"
-        alt="Hero background"
-        fill
-        priority
+      {/* Background image — plain img tag works reliably on Vercel for static assets */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/assets/hero-bg.jpg"
+        alt=""
+        aria-hidden="true"
         className="hero-bg-image"
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: 1,
+        }}
       />
 
       {/* Dark overlay */}
@@ -111,6 +123,12 @@ export default function Hero() {
               {social.svg}
             </a>
           ))}
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="hero-scroll-indicator">
+          <span className="hero-scroll-label">Scroll</span>
+          <div className="hero-scroll-line" />
         </div>
       </div>
     </section>
