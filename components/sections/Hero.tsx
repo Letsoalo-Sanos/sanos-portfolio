@@ -1,151 +1,119 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 
+const TYPED_ITEMS = ["Freelancer", "Data Scientist", "Technical Business Support Specialist",  "Problem Solver"];
+
 export default function Hero() {
+  const typedRef = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    let itemIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let timer: ReturnType<typeof setTimeout>;
+
+    function type() {
+      const current = TYPED_ITEMS[itemIndex];
+      if (isDeleting) { charIndex--; } else { charIndex++; }
+      if (typedRef.current) {
+        typedRef.current.textContent = current.substring(0, charIndex);
+      }
+      let delay = isDeleting ? 60 : 100;
+      if (!isDeleting && charIndex === current.length) {
+        delay = 1800;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        itemIndex = (itemIndex + 1) % TYPED_ITEMS.length;
+        delay = 400;
+      }
+      timer = setTimeout(type, delay);
+    }
+
+    timer = setTimeout(type, 600);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <section
-      id="about"
-      className="relative min-h-screen flex items-center pt-16 overflow-hidden"
-    >
-      {/* Background grid */}
-      <div
-        className="absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "linear-gradient(#c9a84c 1px, transparent 1px), linear-gradient(90deg, #c9a84c 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
+    <section id="about" className="hero-section">
+      {/* Background image */}
+      <Image
+        src="/assets/hero-bgg.jpeg"
+        alt="Hero background"
+        fill
+        priority
+        className="hero-bgg-image"
       />
 
-      {/* Radial glow */}
-      <div
-        className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full opacity-10 blur-3xl pointer-events-none"
-        style={{ background: "radial-gradient(ellipse, #c9a84c 0%, transparent 70%)" }}
-      />
+      {/* Dark overlay */}
+      <div className="hero-overlay" />
 
-      <div className="relative max-w-6xl mx-auto px-6 py-20 grid md:grid-cols-2 gap-16 items-center">
-        {/* Text */}
-        <div>
-          <p className="animate-fade-up animate-delay-100 text-sm font-medium tracking-[0.2em] uppercase gold-accent mb-4">
-            Data Scientist · ML Engineer · Freelancer
-          </p>
+      {/* Content */}
+      <div className="hero-content">
+        <h2 className="hero-name">Letsoalo Sanos Neo</h2>
 
-          <h1 className="animate-fade-up animate-delay-200 font-playfair text-5xl md:text-6xl font-bold text-white leading-tight mb-6">
-            Letsoalo
-            <br />
-            <span className="gold-accent">Sanos Neo</span>
-          </h1>
+        <p className="hero-subtitle">
+          I&apos;m{" "}
+          <span ref={typedRef} className="hero-typed" />
+          <span className="hero-cursor" />
+        </p>
 
-          <p className="animate-fade-up animate-delay-300 text-slate-400 text-lg leading-relaxed mb-4 max-w-lg">
-            A Computer Science Honours graduate from Limpopo, South Africa,
-            on a mission to use data and machine learning to solve problems
-            that actually matter — from predicting system failures to uncovering
-            insights that drive smarter decisions.
-          </p>
-          <p className="animate-fade-up animate-delay-300 text-slate-400 text-base leading-relaxed mb-8 max-w-lg">
-            I freelance across ML modelling, data visualisation, and cybersecurity,
-            and I care deeply about contributing to a growing South African tech
-            ecosystem. If data tells a story, I want to be the one who finds it.
-          </p>
-
-          <div className="animate-fade-up animate-delay-400 flex flex-wrap gap-4">
-            <a href="#projects" className="btn-primary">
-              View Projects
+        {/* Social links */}
+        <div className="hero-socials">
+          {[
+            {
+              href: "https://github.com/Letsoalo-Sanos",
+              label: "GitHub",
+              svg: (
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                </svg>
+              ),
+            },
+            {
+              href: "https://linkedin.com/in/sanos-letsoalo",
+              label: "LinkedIn",
+              svg: (
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+              ),
+            },
+            {
+              href: "mailto:letsoalo.sanos@gmail.com",
+              label: "Email",
+              svg: (
+                <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              ),
+            },
+            {
+              href: "https://twitter.com/",
+              label: "Twitter / X",
+              svg: (
+                <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                </svg>
+              ),
+            },
+          ].map((social) => (
+            <a
+              key={social.label}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              className="hero-social-link"
+            >
+              {social.svg}
             </a>
-            <a href="#contact" className="btn-outline">
-              Hire Me
-            </a>
-          </div>
-
-          {/* Quick stats */}
-          <div className="animate-fade-up animate-delay-400 mt-12 flex flex-wrap gap-10">
-            {[
-              { value: "BSc Hons", label: "Computer Science" },
-              { value: "90%",      label: "RF Model Accuracy" },
-              { value: "5+",       label: "Projects Completed" },
-              { value: "4",        label: "Certifications" },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <p className="font-playfair text-2xl font-bold gold-accent">{stat.value}</p>
-                <p className="text-slate-500 text-xs mt-0.5">{stat.label}</p>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
 
-        {/* Profile card */}
-        <div className="animate-fade-up animate-delay-300 flex justify-center">
-          <div className="card-base w-full max-w-sm">
-            {/* Profile photo */}
-            <div className="relative w-28 h-28 mx-auto mb-5">
-              <Image
-                src="/assets/photo.jpg"
-                alt="Letsoalo Sanos Neo"
-                fill
-                className="rounded-full object-cover object-top border-2 border-amber-600/40"
-                priority
-              />
-            </div>
 
-            <h2 className="font-playfair text-xl font-bold text-white text-center mb-1">
-              Letsoalo Sanos Neo
-            </h2>
-            <p className="text-center gold-accent text-sm mb-1">
-              Data Scientist & ML Engineer
-            </p>
-            <p className="text-center text-slate-500 text-xs mb-5">
-              Available for freelance work
-            </p>
-
-            {/* Availability badge */}
-            <div className="flex justify-center mb-5">
-              <span className="flex items-center gap-2 text-xs text-emerald-400 bg-emerald-900/30 border border-emerald-800/50 px-3 py-1.5 rounded-full">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Open to opportunities
-              </span>
-            </div>
-
-            <div className="space-y-3 text-sm">
-              {[
-                { icon: "📍", text: "Polokwane, Limpopo, South Africa" },
-                { icon: "🎓", text: "BSc Honours — Computer Science, UL" },
-                { icon: "💼", text: "Technical Business Support @ Umuzi" },
-                { icon: "✉️", text: "letsoalo.sanos@gmail.com" },
-              ].map((item) => (
-                <div key={item.text} className="flex items-start gap-3 text-slate-400">
-                  <span className="text-base flex-shrink-0">{item.icon}</span>
-                  <span>{item.text}</span>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-5 flex gap-3 justify-center">
-              <a
-                href="https://github.com/Letsoalo-Sanos"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tag hover:opacity-80 transition-opacity cursor-pointer"
-              >
-                GitHub
-              </a>
-              <a
-                href="https://linkedin.com/in/sanos-letsoalo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tag hover:opacity-80 transition-opacity cursor-pointer"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="/assets/LETSOALO_SANOS_NEO_CV.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tag hover:opacity-80 transition-opacity cursor-pointer"
-              >
-                CV ↓
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
