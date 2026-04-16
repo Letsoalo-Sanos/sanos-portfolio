@@ -41,25 +41,24 @@ export default function About() {
         {/* Intro */}
         <div className="max-w-3xl mb-14">
           <h3 className="font-playfair text-2xl font-bold text-white mb-5 leading-snug">
-            A data-driven professional from the heart of South Africa
+            Data Scientist & Technical Business Support Specialist delivering actionable insights.
           </h3>
           <p className="text-slate-400 leading-relaxed mb-4">
-            I am <span className="text-white font-medium">Letsoalo Sanos Neo</span>, a
-            Computer Science Honours graduate and aspiring Data Scientist based in
-            Pretoria, South Africa. My academic journey at the University of Limpopo
-            spanning Mathematical Science and Computer Science gave me a rigorous
-            foundation in statistics, algorithms, machine learning, and network security.
+             I’m <span className="text-white font-medium">Letsoalo Sanos Neo</span>,
+              a Computer Science Honours graduate specializing in data science,
+             machine learning, and technical business support.
+             I help businesses convert raw data into meaningful insights that support smarter decisions and measurable outcomes.
+
           </p>
           <p className="text-slate-400 leading-relaxed mb-4">
-            I believe that data is one of the most powerful tools for solving real-world
-            problems, especially in a South African context where the right insights can
-            drive meaningful change across healthcare, agriculture, finance, and
-            infrastructure.
+             With a strong foundation in statistics, predictive modeling, and data analysis,
+             I have developed solutions across classification, regression,
+             and data visualization using tools such as Python, Power BI, and modern machine learning frameworks.
           </p>
           <p className="text-slate-400 leading-relaxed">
-            Currently growing through a Technical Business Support role at Umuzi in
-            Johannesburg, I combine technical depth with strong communication skills
-            turning complexity into clarity for teams and stakeholders alike.
+           Currently training in Technical Business Support at Umuzi, 
+           I bridge the gap between technical teams and business needs,ensuring solutions are practical,
+           scalable, and aligned with real-world objectives.
           </p>
           <div className="flex flex-wrap gap-3 mt-8">
             <a href="#contact"   className="btn-primary">Let&apos;s Talk</a>
